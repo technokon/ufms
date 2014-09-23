@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import com.entity.processor.Transaction;
 
     @Stateless
-public class TransactionDaoImpl implements TransactionDao<Transaction>{
+public class TransactionDAOImpl implements TransactionDAO<Transaction>{
 	 
 	@PersistenceContext
 	private EntityManager em;
