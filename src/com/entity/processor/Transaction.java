@@ -3,6 +3,7 @@ package com.entity.processor;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Transaction {
@@ -12,6 +13,8 @@ public class Transaction {
 	private Date transactionDate;
 	private String location;
 	private String notes;
+	
+	@XmlTransient
 	public long getId() {
 		return id;
 	}

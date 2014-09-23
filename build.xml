@@ -63,7 +63,9 @@
 		<!-- Create directory -->
 		<mkdir dir="${temp.dir}"/>
 
-		<jar destfile="${temp.dir}\ProcessorEJB.jar" basedir="ProcessorEJB\classes"/>
+		<jar destfile="${temp.dir}\ProcessorEJB.jar" basedir="ProcessorEJB\classes">
+			<metainf dir="ProcessorEJB\META-INF"/>
+		</jar>
 		
 		<jar destfile="${temp.dir}\TransactionProcessorEJBWS.jar" basedir="TransactionProcessorEJBWS\classes"/>
 
