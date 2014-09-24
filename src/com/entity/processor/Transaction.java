@@ -2,16 +2,36 @@ package com.entity.processor;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+@Table(name="SUSPICIOUS_TRASACTION")
 public class Transaction {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="ID")
 	private long id;
+	
+	@Column(name="TRANSACTION_ID")
 	private String transactionId;
+	
+	@Column(name ="TRANSACTION_NAME")
 	private String name;
+	
+	@Column(name ="TRANSACTION_DATE")
 	private Date transactionDate;
+	
+	@Column(name ="TRANSACTION_LOCATION")
 	private String location;
+	
+	@Column(name ="NOTES")
 	private String notes;
 	
 	@XmlTransient
