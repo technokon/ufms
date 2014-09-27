@@ -30,7 +30,7 @@
 		<mkdir dir="${temp.dir}"/>
 
 		<jar destfile="${temp.dir}\ProcessorEJB.jar" basedir="ProcessorEJB\classes"/>
-				
+
 		<jar destfile="${temp.dir}\TransactionProcessorEJBWS.jar" basedir="TransactionProcessorEJBWS\classes"/>
 
 		<war destfile="${temp.dir}\TransactionManager.war" webxml="TransactionManagerWebContent\WEB-INF\web.xml">
@@ -66,14 +66,14 @@
 		<jar destfile="${temp.dir}\ProcessorEJB.jar" basedir="ProcessorEJB\classes">
 			<metainf dir="ProcessorEJB\META-INF"/>
 		</jar>
-		
+
 		<jar destfile="${temp.dir}\TransactionProcessorEJBWS.jar" basedir="TransactionProcessorEJBWS\classes"/>
-		
+
 		<war destfile="${temp.dir}\TransactionManger.war" webxml="TransactionManagerWebContent\WEB-INF\web.xml">
-			<fileset dir="InvestigationManagerWebContent" includes="*.xhtml"/>
-			<webinf dir= "InvestigationManagerWebContent\WEB-INF">
+			<fileset dir="InvestigationManagerWebContent" includes="*.xhtml" />
+			<webinf dir="InvestigationManagerWebContent\WEB-INF">
 			</webinf>
-			</war>
+		</war>
 
 		<ear destfile="${deploy.dir}\ufms.ear" appxml="EAR\application.xml">
 			<fileset dir="Temp" includes="*.jar,*.war"/>
