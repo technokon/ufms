@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import com.entity.processor.Transaction;
 
-    @Stateless
+@Stateless
 public class TransactionDAOImpl implements TransactionDAO<Transaction>{
 	 
 	@PersistenceContext
@@ -21,6 +21,7 @@ public class TransactionDAOImpl implements TransactionDAO<Transaction>{
 		return tx;
 		
 	}
+	
 	@Override
 	public List<Transaction> retrieveTransactions() {
 		TypedQuery<Transaction> q = em.createQuery("from Transaction", Transaction.class);
