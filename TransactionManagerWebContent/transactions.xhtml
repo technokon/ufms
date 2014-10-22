@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="resources.application" var="msg" />
+
+<head>
+
+<style type="text/css">
+	.trTable {
+		border-collapse: collapse;
+		border: 1px solid #000000;
+	}
+	
+	.trTableHeader {
+		text-align: center;
+		background: none repeat scroll 0 0 #B5B5B5;
+		border-bottom: 1px solid #000000;
+		padding: 2px;
+	}
+	
+	.trTableOddRow {
+		text-align: center;
+		background: none repeat scroll 0 0 #FFFFFFF;
+	}
+	
+	.trTableEvenRow {
+		text-align: center;
+		background: none repeat scroll 0 0 #D3D3D3;
+	}
+</style>
+
+<title><h:outputText value="#{msg.welcomeTitle}" /></title>
+</head>
+<h:body>
+	<h2>Transactions</h2>
+	<h:form>
+		<h:dataTable value="#{login.transactions}" var="transaction"
+			styleClass="trTable" headerClass="trTableHeader"
+			rowClasses="trTableOddRow,trTableEvenRow">
+			<h:column>
+				<f:facet name="header">Transaction ID</f:facet>    				
+            #{transaction.transactionId}
+         </h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+            #{transaction.name}
+         </h:column>
+			<h:column>
+				<f:facet name="header">Date</f:facet>
+            #{transaction.transactionDate}
+         </h:column>
+         <h:column>
+				<f:facet name="header">location</f:facet>
+            #{transaction.location}
+         </h:column>
+			<h:column>
+				<f:facet name="header">Notes</f:facet>
+            #{transaction.notes}
+         </h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

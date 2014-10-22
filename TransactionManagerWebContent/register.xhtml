@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="resources.application" var="msg" />
+
+<head>
+<title><h:outputText value="#{msg.welcomeTitle}" /></title>
+</head>
+<body>
+
+<f:view>
+
+<h:form id="registerForm">
+
+<h:panelGrid colomns="2" rendered="#{!login.loggedIn}">
+<h:outputLabel for="username">Username</h:outputLabel>
+<h:inputText id="username" value="#{credentials.username}" />
+<h:outputLabel for="firsrName">First Name</h:outputLabel>
+<h:inputText id="firstName" value="#{credentials.firstName}" />
+<h:outputLabel for="lastName">Last Name</h:outputLabel>
+<h:inputText id="lastName" value="#{credentials.lastName}" />
+<h:outputLabel for="password">Password</h:outputLabel>
+<h:inputSecret id="password" value="#{credentials.password}" />
+<h:outputLabel for="confirmPassword">Confirm Password</h:outputLabel>
+<h:inputSecret id="confirmPassword" value="#{credentials.confirmPassword}" />
+
+</h:panelGrid>
+
+<h:commandButton value="Register" action="#{login.register}" />
+<h:link outcome="login" value="Cancel" />
+
+<h:messages />
+
+</h:form>
+</f:view>
+</body>
+</html>

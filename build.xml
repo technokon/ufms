@@ -15,7 +15,7 @@
             UFMS application
     </description>
 
-	<property name="deploy.dir" value="C:\Oracle\Middleware\user_projects\domains\fmca\autodeploy" />
+	<property name="deploy.dir" value="C:\Oracle\Middleware\user_projects\domains\ufms\autodeploy" />
 	<property name="temp.dir" value="Temp" />
 
 	<!-- ================================= 
@@ -55,7 +55,21 @@
 	</target>
 
 	<!-- TEST target************************************************************************************* -->
-	<target name="testBuild" depends="compileProcessor, compiletTransactionProcessor, compileTransactionManager" description="UFMS compilation">
+	<target name="testBuild" depends="clean, compileProcessor, compiletTransactionProcessor, compileTransactionManager, persistence-jar" description="UFMS compilation">
+
+		<ear destfile="${deploy.dir}\ufms.ear" appxml="EAR\application.xml">
+			<zipfileset dir="EAR\lib" prefix="lib">
+				<include name="*.jar" />
+			</zipfileset>
+
+			<fileset dir="Temp" includes="*.jar,*.war" />
+		</ear>
+
+	</target>
+	<!-- TEST target **************************************************************************************** -->
+
+
+	<target name="clean">
 
 		<!-- Delete temp dir -->
 		<delete dir="${temp.dir}" />
@@ -63,31 +77,28 @@
 		<!-- Create directory -->
 		<mkdir dir="${temp.dir}"/>
 
-		<jar destfile="${temp.dir}\ProcessorEJB.jar" basedir="ProcessorEJB\classes">
-			<metainf dir="ProcessorEJB\META-INF"/>
-		</jar>
-
-		<jar destfile="${temp.dir}\TransactionProcessorEJBWS.jar" basedir="TransactionProcessorEJBWS\classes"/>
-
-		<war destfile="${temp.dir}\TransactionManger.war" webxml="TransactionManagerWebContent\WEB-INF\web.xml">
-			<fileset dir="InvestigationManagerWebContent" includes="*.xhtml" />
-			<webinf dir="InvestigationManagerWebContent\WEB-INF">
-			</webinf>
-		</war>
-
-		<ear destfile="${deploy.dir}\ufms.ear" appxml="EAR\application.xml">
-			<fileset dir="Temp" includes="*.jar,*.war"/>
-		</ear>
+		<delete file="${deploy.dir}\ufms.ear"/>
 
 	</target>
-	<!-- TEST target **************************************************************************************** -->
 
 	<path id="processor.lib">
 		<fileset dir="lib" includes="*.jar" />
+		<fileset dir="EAR\lib" includes="*.jar" />
+		<fileset dir="Temp" includes="*.jar" />
 	</path>
 
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: compile Processor                     
+	      target: package persistence jar                     
+	     - - - - - - - - - - - - - - - - - -->	
+	<target name="persistence-jar">
+		<!-- package persistence unit in a separate jar -->
+		<jar destfile="EAR\lib\Persistence-xml.jar">
+			<metainf dir="Persistence-xml\META-INF"/>
+		</jar>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: compile Transaction Processor                     
          - - - - - - - - - - - - - - - - - -->
 
 	<target name="compiletTransactionProcessor">
@@ -101,6 +112,9 @@
 		</copy>
 
 		<javac srcdir="src" includes="com/transaction/processor/**" destdir="TransactionProcessorEJBWS\classes" includeantruntime="true" classpathref="processor.lib" debug="on" />
+
+		<jar destfile="${temp.dir}\TransactionProcessorEJBWS.jar" basedir="TransactionProcessorEJBWS\classes"/>
+
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
@@ -118,15 +132,21 @@
 		</copy>
 
 		<javac srcdir="src" includes="com/processor/**, com/entity/**" destdir="ProcessorEJB\classes" includeantruntime="true" classpathref="processor.lib" debug="on" />
+
+		<jar destfile="${temp.dir}\ProcessorEJB.jar" basedir="ProcessorEJB\classes">
+			<metainf dir="ProcessorEJB\META-INF"/>
+		</jar>
+
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: compile Transaction Manager                     
          - - - - - - - - - - - - - - - - - -->
 	<path id="transactionManager.lib">
-		<!--<fileset dir="TransactionManagerWebContent\WEB-INF\lib" includes="*.jar" />-->
+		<!--<fileset dir="TransactionManagerWebContent\WEB-INF\lib" includes="*.jar" /> -->
 		<fileset dir="lib" includes="*.jar" />
 		<fileset dir="Temp" includes="*.jar" />
+		<fileset dir="EAR\lib" includes="*.jar" />
 	</path>
 	<target name="compileTransactionManager">
 
@@ -139,6 +159,13 @@
 		</copy>
 
 		<javac srcdir="src" includes="com/transaction/manager/**" destdir="TransactionManagerWebContent\WEB-INF\classes" includeantruntime="true" classpathref="transactionManager.lib" debug="on" />
+
+		<war destfile="${temp.dir}\TransactionManager.war" webxml="TransactionManagerWebContent\WEB-INF\web.xml">
+			<fileset dir="TransactionManagerWebContent" includes="*.xhtml" />
+			<webinf dir="TransactionManagerWebContent\WEB-INF">
+			</webinf>
+		</war>
+
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 

@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-@Local
-public interface TransactionDAO<T> {
-	public T persistTransaction(T tx);
+import com.entity.processor.Transaction;
 
-	public List<T> retrieveTransactions();
+@Local
+public interface TransactionDAO {
+	public Transaction persistTransaction(Transaction tx);
+
+	public List<Transaction> retrieveTransactions();
 
 }

@@ -18,7 +18,7 @@ import com.processor.dao.TransactionDAO;
 public class TransactionProcessorImpl implements TransactionProcessor{
 	
 	@EJB
-	private TransactionDAO<Transaction> dao;
+	private TransactionDAO dao;
 	
 
 	@Override

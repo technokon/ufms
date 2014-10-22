@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="lib/javax.persistence_2.0.0.0_2-0.jar"/>
 	<classpathentry kind="lib" path="lib/javax.enterprise.inject_1.0.jar"/>
 	<classpathentry kind="lib" path="lib/javax.inject_1.0.jar"/>
+	<classpathentry kind="lib" path="EAR/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/javax.jsf_1.2.0.0_1-2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

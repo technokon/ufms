@@ -3,4 +3,4 @@
  <scan>
   <exclude name="com.chapter1.*" />
  </scan>
-</beans
+</beans>

@@ -31,6 +31,8 @@
     rendered="#{login.loggedIn}" />
 
   </h:form>
+  <h:link outcome="register" value="Register" rendered="#{!login.loggedIn}"/>
  </f:view>
+ <h:messages />
 </body>
 </html>

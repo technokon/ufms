@@ -7,15 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name="SUSPICIOUS_TRASACTION")
+@Table(name="SUSPICIOUS_TRANSACTION")
 public class Transaction {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(generator="TRANSACTION_SEQ1")
+	@SequenceGenerator(name="TRANSACTION_SEQ1", sequenceName="TRANSACTION_SEQ1", allocationSize=1)
 	@Column(name="ID")
 	private long id;
 	
@@ -26,6 +30,7 @@ public class Transaction {
 	private String name;
 	
 	@Column(name ="TRANSACTION_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date transactionDate;
 	
 	@Column(name ="TRANSACTION_LOCATION")

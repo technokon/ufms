@@ -1,32 +1,83 @@
 package com.entity.processor;
 
 import javax.enterprise.inject.Model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Model
+@Entity
+@Table(name="UFMS_USER")
 public class User {
 	
-	private String userName;
+	@Id
+	@GeneratedValue(generator="USER_SEQ1")
+	@SequenceGenerator(name="USER_SEQ1", sequenceName="USER_SEQ1", allocationSize=1)
+	@Column(name="ID")
+	private long id;
 	
-	private String password;
+	@Column
+	private String username;
 	
+	@Column
+	private String salt;
+	
+	@Column(name="HASHED_PASSWORD")
+	private String hashedPassword;
+	
+	@Column(name="FIRST_NAME")
 	private String firstName;
-	
-	private String lastName;
+    
+    @Column(name="LAST_NAME")
+    private String lastName;
+    
+    public User()  { }
+     
+    public User(String username, String salt, String hashedPassword,
+			String firstName, String lastName) {
+		this.username = username;
+		this.salt = salt;
+		this.hashedPassword = hashedPassword;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+    
+    
 
-	public String getUserName() {
-		return userName;
+	public long getId() {
+		return id;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getHashedPassword() {
+		return hashedPassword;
+	}
+
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
 	}
 
 	public String getFirstName() {
@@ -44,5 +95,8 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	
+
 
 }
